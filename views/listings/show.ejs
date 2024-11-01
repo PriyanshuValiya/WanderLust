@@ -1,0 +1,50 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row mt-3">
+    <div class="col-8 offset-3">
+    <h3><%= listing.title %></h3><br>
+    </div>
+    <div class="card col-4 offset-3 show-card">
+        <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image"><br>
+        <div class="card-body">
+          <p class="card-text">
+            <b>Owner: <i><%= listing.owner.username %></i></b><br>
+            <b>Description : </b> <%= listing.description %> <br>
+            <b>Price : </b>&#8377; <%= listing.price.toLocaleString("en-IN") %> <br>
+            <b>Location : </b><%= listing.location %> <br>
+            <b>Country : </b><%= listing.country %> <br>
+        </p>
+        </div>
+    </div><br>
+</div><br>
+
+<div class="show-btns">
+<div class="col-1">
+    <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark" style="border: none">Edit</a><br><br>
+   </div>
+
+   <div class="col-1 two-btns">
+    <form method="GET" action="/listings/<%=listing._id%>/review">
+      <button class="btn btn-success" style="width: 120px;">Add Review</button>
+  </form>
+  
+
+   <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
+       <button class="btn btn-danger">Delete</button>
+   </form>
+</div>
+</div><hr><br>
+
+<h3 class="offset-2">All Reviews</h3><br>
+
+<div class="row offset-3">
+<% for (let review of listing.reviews) { %>
+  <div class="card col-5 mb-3 ms-4" style="border: 1px solid black !important; border-radius: 5px !important">
+    <form method="POST" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
+     <span class="trash position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><button style="background-color: #DC3545; color: white; border: none;"><i class="fa-solid fa-trash"></i></button></span>
+    </form>
+    <h5 class="card-title"><%= review.author.username %></h5>
+    <p class="starability-result" data-rating="<%= review.rating %>"></p>
+    <p class="card-text"><%= review.comment %></p>
+  </div>
+ <% } %>
+</div>

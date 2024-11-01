@@ -1,0 +1,184 @@
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-width: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Navbar */
+
+.navbar {
+    height: 5rem;
+    background-color: #f9f7f7;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.logo {
+    height: 4rem;
+    width: 150px;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+.navbar-collapse {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-box{ 
+    border-radius: 40px 0 0 40px !important;
+    border: 1px solid #DC3545;
+    padding-left: 15px;
+    width: 300px;
+}
+.search-box:hover { 
+    border-radius: 40px 0 0 40px !important;
+    border: 1px solid #DC3545;
+    padding-left: 15px;
+    width: 300px;
+}
+
+.search-btn {
+    border-radius: 0 40px 40px 0 !important;
+}
+
+.login {
+    display: flex;
+    gap: 20px;
+}
+
+/* Index.ejs */
+
+#filters {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.filter {
+    text-align: center;
+    opacity: 0.7;
+}
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter p {
+    font-size: 0.8rem;
+}
+
+/* Footer */
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.f-info-socials i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+
+/* Cards */
+
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card:hover {
+    background-color: rgb(233, 233, 233);
+    border-radius: 1rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text {
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* Show Page */
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.show-img {
+    height: 40vh;
+    margin-left: 150px;
+}
+
+.show-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card:hover {
+    background-color: white;
+}
+
+.two-btns {
+    display: flex;
+    margin-right: 80px;
+    gap: 10px;
+}
+
+/* Review Section */
+
+.form-range {
+    width: 90% !important;
+}
