@@ -9,7 +9,7 @@ const listingSchema = new Schema({
   description: String,
   image: {
     url: String,
-    filename: String
+    filename: String,
   },
   price: Number,
   location: String,
@@ -17,13 +17,13 @@ const listingSchema = new Schema({
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Review"
-    }
+      ref: "Review",
+    },
   ],
   owner: {
     type: Schema.Types.ObjectId,
-    ref: "User"
-    }
+    ref: "User",
+  },
 });
 
 const Listing = mongoose.model("Listing", listingSchema);

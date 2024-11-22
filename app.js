@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV != "production") {
-  require('dotenv').config();
+  require("dotenv").config();
 }
 
 const express = require("express");
@@ -17,10 +17,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 const flash = require("connect-flash");
-const multer  = require('multer');
-const {storage} = require("./cloudConfig.js");
+const multer = require("multer");
+const { storage } = require("./cloudConfig.js");
 const upload = multer({ storage });
-
 
 const userRouter = require("./routes/user.js");
 const listingController = require("./controllers/listings.js");
@@ -28,21 +27,22 @@ const reviewController = require("./controllers/reviews.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-// const dbUrl = process.env.ATLASDB_URL;
-
 async function main() {
-   await mongoose.connect(MONGO_URL);
+  await mongoose.connect(process.env.ATLASDB_URL);
 }
 
 main()
-  .then(() => {console.log("connected to DB")})
-  .catch((err) => {console.log(err)});
+  .then(() => {
+    console.log("connected to DB");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // const checkToken = ((req, res, next) => {
 //   let { token } = req.query;
@@ -65,7 +65,7 @@ const sessionOptions = {
   cookie: {
     expiree: Date.now() + 7 * 24 * 60 * 60 * 1000,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-  }
+  },
 };
 app.use(session(sessionOptions));
 app.use(flash());
@@ -82,17 +82,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// app.get("/demouser", async (req, res) => {
-//   let fakeUser = new User({
-//     email: "priyansu@gmail.com",
-//     username: "Priyanshu"
-//   });
-
-//   let registeredUser = await User.register(fakeUser, "Priyansu@2006");
-//   res.send(registeredUser);
-// });
-
-//  Index Route
+// Index Route
 app.get("/listing", wrapAsync(listingController.index));
 
 // New Route
@@ -102,13 +92,21 @@ app.get("/listing/new", listingController.renderNewForm);
 app.get("/listing/:id", wrapAsync(listingController.showListing));
 
 // Create Route
-app.post("/listings", upload.single('listing[image]'), wrapAsync(listingController.createListing));
+app.post(
+  "/listings",
+  upload.single("listing[image]"),
+  wrapAsync(listingController.createListing)
+);
 
 // Edit Route
 app.get("/listings/:id/edit", wrapAsync(listingController.renderEditForm));
 
 // Update Route
-app.put("/listings/:id", upload.single('listing[image]'), wrapAsync(listingController.updateListing));
+app.put(
+  "/listings/:id",
+  upload.single("listing[image]"),
+  wrapAsync(listingController.updateListing)
+);
 
 // Delete Route
 app.delete("/listings/:id", wrapAsync(listingController.destroyListing));
@@ -119,7 +117,8 @@ app.get("/listings/:id/review", reviewController.showReviewForm);
 app.post("/listings/:id/review", reviewController.addReview);
 
 // Delete Review Route
-app.delete("/listings/:id/reviews/:reviewId"), wrapAsync(reviewController.deleteReview);
+app.delete("/listings/:id/reviews/:reviewId"),
+  wrapAsync(reviewController.deleteReview);
 
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found :("));
